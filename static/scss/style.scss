@@ -1,0 +1,423 @@
+@import "color", "typhography", "base";
+
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+
+body {
+  position: relative;
+  margin: $header-height 0 0 0;
+  padding: 0 1rem;
+  font-family: $typhography;
+  font-size: $normal-font-size;
+  transition: .5s;
+  background-color: $base-color;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+footer {
+  width: 100%;
+  padding: 0 1rem;
+  position: fixed;
+  left: 0;
+
+  background-color: $secondary-base-color;
+
+  .social-button:hover {
+    background-color: $secundary-color;
+    border-color: $secundary-color;
+  }
+}
+
+.bi-x-lg {
+  font-size: 1.5rem;
+}
+
+// layout classes
+.header {
+  width: 100%;
+  height: $header-height;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  background-color: $secondary-base-color;
+  z-index: $z-index-default;
+  transition: .5s;
+}
+
+.header_toggle {
+  color: $secundary-color;
+  font-size: 2rem;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.header_img {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+
+  img {
+    width: 40px;
+  }
+}
+
+.l-navbar {
+  position: fixed;
+  top: 0;
+  left: -30%;
+  width: $nav-width;
+  height: 100vh;
+  background-color: $secondary-base-color;
+  padding: .5rem 1rem 0 0;
+  transition: .5s;
+  z-index: $z-index-default;
+}
+
+.nav {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.nav_logo,
+.nav_link {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  align-items: center;
+  column-gap: 1rem;
+  padding: .5rem 0 .5rem 1.5rem;
+}
+
+.nav_logo {
+  margin-bottom: 2rem;
+}
+
+.nav_logo-icon {
+  font-size: 1.25rem;
+  color: $secundary-color;
+}
+
+.nav_logo-name {
+  color: $secundary-color;
+  font-weight: 700;
+}
+
+.nav_link {
+  position: relative;
+  color: $main-color;
+  margin-bottom: 2rem;
+  transition: .3s;
+}
+
+.nav_link:hover {
+  color: $secundary-color;
+}
+
+.nav_icon {
+  font-size: 1.25rem;
+}
+
+.show {
+  left: 0;
+}
+
+.body-pd {
+  padding-left: calc(#{$nav-width} + 1rem);
+}
+
+.active {
+  color: $contrast-color;
+}
+
+.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 2px;
+  height: 32px;
+  background-color: $contrast-color;
+}
+
+.height-100 {
+  height: 100vh;
+}
+
+.profile-collapse {
+  background-color: $secondary-base-color;
+  padding: 1em;
+  padding-top: 2em;
+}
+
+.menu {
+  display: block;
+  i {
+
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.to_end {
+  justify-content: end;
+}
+
+.nav-item {
+  display: flex;
+  i {
+    font-size: 2em;
+    margin-right: 20px;
+    color: $main-color;
+  }
+
+  &:hover {
+    color: $contrast-color;
+    i {
+      color: $base-letter-color;
+    }
+  }
+}
+
+.content-center {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-total {
+  color: $main-color;
+}
+
+.login-button {
+  border: 1px solid $main-color;
+  border-radius: 10px 30px;
+  margin-top: 20px;
+  color: $main-color;
+  padding: 20px;
+  font-size: 20px;
+
+  &:hover {
+    color: $black-color;
+    background-color: $main-color;
+  }
+}
+
+.form-background {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  padding: 2em;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+.btn-login {
+  margin-top: 1em;
+  border: 1px solid $base-color;
+  background-color: $base-color;
+  color: $main-color;
+  border-radius: 10px;
+  padding: 5px 1em;
+  width: 100%;
+  &:hover {
+    background-color: $secundary-color;
+    border-color: $secundary-color;
+  }
+}
+
+.cont-struct {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  left: 0;
+  top: 0;
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+}
+
+.before {
+  display: flex;
+  align-items: center;
+
+  a:hover {
+    color: $contrast-color;
+  }
+  .before-icon {
+    color: white;
+    font-size: 5em;
+    display: flex;
+
+    &:hover {
+      color: $contrast-color;
+    }
+  }
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 5em;
+  color: $base-letter-color;
+}
+
+.block {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  margin: 1em;
+  padding: 1em;
+  margin-left: 0;
+
+  .title {
+    display: inline-flex;
+    vertical-align: middle;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 1em;
+    color: black;
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+    h6 {
+      font-weight: bold;
+    }
+  }
+
+  .block-table {
+    overflow-y: hidden;
+  }
+}
+
+.inf {
+  display: flex;
+  flex-direction: row;
+  margin-left: 1em;
+  align-items: center;
+  h3 {
+    font-weight: bold;
+    font-size: 18px;
+    margin: 0;
+  }
+  p {
+    margin: 0;
+    margin-left: 20px;
+    font-weight: lighter;
+    font-size: 15px;
+  }
+}
+
+.center-image {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.user_image {
+  width: 200px;
+  border: 1px solid black;
+  border-radius: 100px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1em;
+  justify-content: space-evenly;
+}
+
+.form-filter {
+  background-color: rgba(255, 255, 255, 0.6);
+  margin-right: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 30px;
+
+  display: grid;
+  .filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    p {
+      justify-self: stretch;
+      align-self: stretch;
+      place-self: center;
+
+      input {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.page-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination {
+  display: flex;
+  justify-content: end;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    margin: calc($header-height + 1rem) 0 0 0;
+    padding-left: calc(#{$nav-width} + 2rem);
+  }
+
+  .header {
+    height: calc($header-height + 1rem);
+    padding: 0 2rem 0 calc(#{$nav-width} + 2rem);
+  }
+
+  .header_img {
+    width: 40px;
+    height: 40px;
+    img {
+      width: 45px;
+    }
+  }
+
+  .l-navbar {
+    left: 0;
+    padding: 1rem 1rem 0 0;
+  }
+
+  .show {
+    width: calc(#{$nav-width} + 156px);
+  }
+
+  .body-pd {
+    padding-left: calc(#{$nav-width} + 188px);
+  }
+}

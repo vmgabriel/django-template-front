@@ -1,0 +1,72 @@
+{% extends "content.html" %}
+{% load static %}
+
+{% block container %}
+  <div class="title">
+    <h3>My Profile</h3>
+  </div>
+  <div class="block">
+    <div class="title">
+      <h6>Basic Information</h6>
+      <div class="badges">
+        {% if user_data.is_superuser %}
+          <span class="badge bg-success">Admin</span>
+        {% endif %}
+        {% if user_data.is_staff %}
+          <span class="badge bg-warning">Staff</span>
+        {% endif %}
+        {% if user_data.blocked_at %}
+          <span class="badge bg-danger">Blocked</span>
+        {% endif %}
+        {% if user_data.inactive_at %}
+          <span class="badge bg-dark">Inactive</span>
+        {% endif %}
+      </div>
+    </div>
+    <div class="inf">
+      <div class="center-image">
+        <img class="user_image" alt="user image" src="{% if user_data.image %}{{ user_data.image.url }}{% else %}{% static 'img/user.png' %}{% endif %}"/>
+      </div>
+    </div>
+    <div class="inf">
+      <h3>Username</h3>
+      <p>{{ user_data.username }}</p>
+    </div>
+    <div class="inf">
+      <h3>Full name</h3>
+      <p>{{ user_data.first_name }} {{ user_data.last_name }}</p>
+    </div>
+    <div class="inf">
+      <h3>Telephone</h3>
+      <p>{{ user_data.telephone }}</p>
+    </div>
+    {% if user_data.blocked_at  %}
+      <div class="inf">
+        <h3>Blocked At</h3>
+        <p>{{ user_data.blocked_at }}</p>
+      </div>
+    {% endif %}
+    {% if user_data.inactive_at  %}
+      <div class="inf">
+        <h3>Deleted At</h3>
+        <p>{{ user_data.inactive_at }}</p>
+      </div>
+    {% endif %}
+    <div class="buttons">
+      {% if me %}
+        <a class="btn btn-primary" href="{% url 'accounts:profile-user-edit' %}">Edit Profile</a>
+      {% endif %}
+      {% if not user_data.inactive_at %}
+
+        {% if user.is_superuser and not user_data.is_superuser %}
+          <a class="btn btn-danger" href="{% url 'accounts:profile-username-delete' username=user_data.username %}"><i class="bi bi-trash-fill"></i> Delete</a>
+          {% if user_data.blocked_at %}
+            <a class="btn btn-success" href="{% url 'accounts:profile-username-unblock' username=user_data.username %}"><i class="bi bi-unlock-fill"></i> Unlock</a>
+          {% else %}
+            <a class="btn btn-secondary" href="{% url 'accounts:profile-username-block' username=user_data.username %}"><i class="bi bi-lock-fill"></i> Block</a>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+{% endblock container %}

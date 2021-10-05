@@ -1,0 +1,37 @@
+{% extends 'content.html' %}
+{% load static %}
+
+{% block container %}
+  <div class="title">
+    <h3>User Profile Edit - {{ object.username }}</h3>
+  </div>
+  <div class="block">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="input-field col s12">
+        <label for="username">{{ form.username.label }}</label>
+        {{ form.username }}
+      </div>
+      <div class="input-field col s12">
+        <label for="first_name">{{ form.first_name.label }}</label>
+        {{ form.first_name }}
+      </div>
+      <div class="input-field col s12">
+        <label for="last_name">{{ form.last_name.label }}</label>
+        {{ form.last_name }}
+      </div>
+      <div class="input-field col s12">
+        <label for="telephone">{{ form.telephone.label }}</label>
+        {{ form.telephone }}
+      </div>
+      <div class="input-field col s12">
+        <label for="image">{{ form.image.label }}</label>
+        {{ form.image }}
+      </div>
+      <div class="buttons">
+        <a class="btn btn-secondary" href="{% url 'accounts:profile-user-edit' %}">Cancel</a>
+        <button class="btn btn-primary" type="submit">Update</button>
+      </div>
+    </form>
+  </div>
+{% endblock container %}

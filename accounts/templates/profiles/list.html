@@ -1,0 +1,83 @@
+{% extends 'content.html' %}
+{% load static %}
+{% load page %}
+
+{% block container %}
+  <div class="title">
+    <h3><i class="bi bi-people-fill"></i> List of User</h3>
+    <div class="general-actions">
+      <a class="btn btn-primary" href="{% url 'accounts:profile-new' %}">Create</a>
+    </div>
+  </div>
+
+  <form class="form-filter" method="GET">
+    <div class="filters">
+      {{ filterset.form.as_p }}
+    </div>
+    <input class="btn btn-primary btn-large" type="submit" value="Filter" />
+  </form>
+
+  <div class="block">
+    {% if is_paginated %}
+      <div class="pagination">
+        <p>
+          Page {{ page_obj.number }} of {{ paginator.num_pages }}
+        </p>
+      </div>
+    {% endif %}
+    <div class="block-table">
+      <table class="table table-responsive">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Username</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Telephone</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in object_list %}
+            <tr>
+              <td><img class="header_img" alt="image of user" src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'img/user.png' %}{% endif %}"/></td>
+              <td>{{ user.username }}</td>
+              <td>{{ user.first_name }} {{ user.last_name }}</td>
+              <td>{{ user.telephone }}</td>
+              <td>
+                <div class="badges">
+                  {% if user.is_superuser %}
+                    <span class="badge bg-success">Admin</span>
+                  {% endif %}
+                  {% if user.is_staff %}
+                    <span class="badge bg-warning">Staff</span>
+                  {% endif %}
+                  {% if user.blocked_at %}
+                    <span class="badge bg-danger">Blocked</span>
+                  {% endif %}
+                  {% if user.inactive_at %}
+                    <span class="badge bg-dark">Inactive</span>
+                  {% endif %}
+                </div>
+              </td>
+              <td>
+                <a class="btn btn-secondary btn-small" href="{% url 'accounts:profile-username' username=user.username %}"><i class="bi bi-eye-fill"></i></a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    {% if is_paginated %}
+      <div class="page-buttons">
+        {% if page_obj.has_previous %}
+          <a class="btn btn-secondary" href="?{% param_replace page=page_obj.previous_page_number %}"><i class="bi bi-chevron-compact-left"></i></a>
+        {% endif %}
+        {% if page_obj.has_next %}
+          <a class="btn btn-secondary" href="?{% param_replace page=page_obj.next_page_number %}"><i class="bi bi-chevron-compact-right"></i></a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+{% endblock container %}
