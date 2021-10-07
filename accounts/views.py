@@ -18,30 +18,20 @@ from .models import User
 # Filters
 from .filters import ProfileFilter
 
-class FilteredListView(generic.list.ListView):
-    filterset_class = None
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        self.filterset = self.filterset_class(self.request.GET, queryset=queryset)
-        return self.filterset.qs.distinct()
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["filterset"] = self.filterset_class(self.request.GET)
-        return context
+# Core
+from core.views import FilteredListView
 
 
 class SignUpView(LoginRequiredMixin, generic.CreateView):
     """Create View Sign Up of account"""
     form_class = RegisterForm
-    success_url = reverse_lazy('accounts:users')
+    success_url = reverse_lazy("accounts:users")
     template_name = "signup.html"
 
 
 class UpdateProfileView(LoginRequiredMixin, generic.edit.UpdateView):
     """Update profile view."""
-    template_name = 'profiles/edit.html'
+    template_name = "profiles/edit.html"
     success_url = reverse_lazy('accounts:profile-user')
     form_class = UserForm
     model = User
@@ -50,10 +40,6 @@ class UpdateProfileView(LoginRequiredMixin, generic.edit.UpdateView):
         """Return user"""
         return self.request.user
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
 
 class ListProfileView(LoginRequiredMixin, FilteredListView):
     template_name = "profiles/list.html"
@@ -61,20 +47,8 @@ class ListProfileView(LoginRequiredMixin, FilteredListView):
     model = User
     paginate_by = settings.DEFAULT_COUNT_PAGINATE
 
-    def get_queryset(self):
-        qs = self.model.objects.all()
-        users_filtered_list = ProfileFilter(self.request.GET, queryset=qs)
-        return users_filtered_list.qs
 
-    def get_context_data(self, **kwargs):
-        qs = self.model.objects.all()
-        context = super(ListProfileView, self).get_context_data(**kwargs)
-        params = self.request.GET
-        context["filter"] = ProfileFilter(params, queryset=qs)
-        return context
-
-
-
+@login_required
 def show_profile(request):
     template = "profiles/show.html"
     return render(
