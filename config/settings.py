@@ -27,7 +27,6 @@ USER_APPLICATIONS = [
 EXTERNAL_APPLICATIONS = [
     "versatileimagefield",
     "django_sass",
-    "fontawesome_free",
     "django_filters",
 ]
 INSTALLED_APPS = [
