@@ -19,7 +19,6 @@ class UserManager(BaseUserManager):
             first_name=None,
             last_name=None,
             is_staff=None,
-            is_active=None,
             telephone=None,
             groups=None,
             **kwargs
@@ -29,7 +28,6 @@ class UserManager(BaseUserManager):
         user = self.model(
             email=email,
             username=username,
-            is_active=is_active or True,
             first_name=first_name,
             telephone=telephone,
             is_staff=is_staff,

@@ -6,7 +6,7 @@ import sys
 import environ
 from pathlib import Path
 from datetime import timedelta
-from .apps import MDA_APPS
+from .app import MDA_APPS
 
 env = environ.Env()
 BASE_DIR = Path(__file__).resolve().parent.parent
