@@ -4,6 +4,7 @@
 import os
 import sys
 import environ
+import django_heroku
 from pathlib import Path
 from datetime import timedelta
 from .app import MDA_APPS
