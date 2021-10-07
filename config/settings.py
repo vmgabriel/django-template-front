@@ -13,10 +13,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 SECRET_KEY = env("SECRET_KEY")
+MODE = (env("MODE", default="production")).lower()
 DEBUG = os.getenv("DEBUG", "False").lower() in ("true", "1", 't')
 
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["127.0.0.1", ".herokuapp.com"]
 
 
 USER_APPLICATIONS = [
@@ -75,10 +76,8 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default": env.db(),
+    "extra": env.db("SQLITE_URL", default="sqlite:////tmp/my_db.sqlite3"),
 }
 
 
@@ -130,3 +129,10 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
 # Paginations of page
 DEFAULT_COUNT_PAGINATE = 20
+
+
+WHITENOISE_USE_FINDERS = True
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+if MODE == "production":
+    django_heroku.settings(locals())

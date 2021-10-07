@@ -6,6 +6,12 @@ shell:
 	python manage.py shell
 
 
+prepare:
+	make migrate
+	mkdir static
+	python manage.py collectstatic
+
+
 migrate:
 	python manage.py makemigrations
 	python manage.py migrate
@@ -13,3 +19,11 @@ migrate:
 
 sass:
 	python manage.py sass static/scss static/css --watch
+
+
+heroku-local:
+	heroku local
+
+
+heroku-prod:
+	heroku create

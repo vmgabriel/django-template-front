@@ -265,3 +265,5 @@ flycheck_*.el
 # Cython debug symbols
 
 # End of https://www.toptal.com/developers/gitignore/api/emacs,python,django
+# Postgres info
+db-data/
