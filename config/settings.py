@@ -11,7 +11,6 @@ from .app import MDA_APPS
 env = environ.Env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
-sys.modules["fontawesome-free"] = __import__("fontawesome-free")
 
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False").lower() in ("true", "1", 't')
